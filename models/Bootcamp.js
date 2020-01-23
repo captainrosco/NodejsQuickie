@@ -15,6 +15,7 @@ const BootcampSchema = new mongoose.Schema({
     maxlength: [500, "Description can not be more than 500  character"]
   },
   website: {
+    type: String,
     match: [
       /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/,
       "Please use a valid URL with HTTP or HTTPS"
@@ -25,6 +26,7 @@ const BootcampSchema = new mongoose.Schema({
     maxlength: [20, "Phone number can not be longer than 20 characters"]
   },
   email: {
+    type: String,
     match: [
       /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
       "Please add a valid email"
@@ -100,4 +102,4 @@ const BootcampSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongooese.model("Bootcamp", BootcampSchema);
+module.exports = mongoose.model("Bootcamp", BootcampSchema);
