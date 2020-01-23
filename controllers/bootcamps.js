@@ -13,9 +13,16 @@ exports.getBootcamp = (req, res, next) => {
 };
 
 //Create a Bootcamp
-exports.createBootcamp = (req, res, next) => {
-  console.log(req.body);
-  res.status(200).json({ succuess: true, msg: "Create new bootcamp" });
+exports.createBootcamp = async (req, res, next) => {
+  try {
+    const bootcamp = await Bootcamp.create(req.body);
+    res.status(201).json({
+      success: true,
+      data: bootcamp
+    });
+  } catch (err) {
+    res.status(400).json({ sucess: false });
+  }
 };
 
 //Delete a Bootcamp
