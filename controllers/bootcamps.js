@@ -9,7 +9,7 @@ exports.getBootcamps = async (req, res, next) => {
       .status(200)
       .json({ success: true, count: bootcamps.length, data: bootcamps });
   } catch (err) {
-    res.status(400).json({ success: false });
+    next(err);
   }
 };
 
@@ -46,12 +46,12 @@ exports.deleteBootcamp = async (req, res, next) => {
   try {
     const bootcamp = await Bootcamp.findByIdAndDelete(req.params.id);
     if (!bootcamp) {
-      return res.status(400).json({ success: false });
+      new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 400);
     }
 
     res.status(200).json({ success: true, data: {} });
   } catch (err) {
-    return res.status(400).json({ success: false });
+    next(err);
   }
 };
 
@@ -63,11 +63,11 @@ exports.updateBootcamp = async (req, res, next) => {
       runValidators: true
     });
     if (!bootcamp) {
-      return res.status(400).json({ success: false });
+      new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 400);
     }
 
     res.status(200).json({ success: true, data: bootcamp });
   } catch (err) {
-    return res.status(400).json({ success: false });
+    next(err);
   }
 };
